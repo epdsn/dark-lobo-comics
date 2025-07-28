@@ -1,0 +1,27 @@
+.site-footer {
+  background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  color: #ffffff;
+  padding: 1.5rem 0;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+}
