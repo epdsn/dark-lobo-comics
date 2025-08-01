@@ -1,0 +1,97 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <h2>Profile</h2>
+      <button 
+        *ngIf="!editMode" 
+        class="btn-edit" 
+        (click)="toggleEditMode()"
+        [disabled]="isLoading"
+      >
+        Edit Profile
+      </button>
+    </div>
+
+    <div *ngIf="isLoading && !user" class="loading">
+      Loading profile...
+    </div>
+
+    <div *ngIf="user && !isLoading" class="profile-content">
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      
+      <div class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <div class="profile-info">
+        <div class="info-group">
+          <label>Username</label>
+          <div *ngIf="!editMode" class="info-value">{{ user.username }}</div>
+          <input 
+            *ngIf="editMode" 
+            type="text" 
+            [(ngModel)]="editData.username" 
+            class="form-control"
+            placeholder="Username"
+          >
+        </div>
+
+        <div class="info-group">
+          <label>Email</label>
+          <div *ngIf="!editMode" class="info-value">{{ user.email }}</div>
+          <input 
+            *ngIf="editMode" 
+            type="email" 
+            [(ngModel)]="editData.email" 
+            class="form-control"
+            placeholder="Email"
+          >
+        </div>
+
+        <div class="info-group">
+          <label>First Name</label>
+          <div *ngIf="!editMode" class="info-value">{{ user.firstName || 'Not provided' }}</div>
+          <input 
+            *ngIf="editMode" 
+            type="text" 
+            [(ngModel)]="editData.firstName" 
+            class="form-control"
+            placeholder="First Name"
+          >
+        </div>
+
+        <div class="info-group">
+          <label>Last Name</label>
+          <div *ngIf="!editMode" class="info-value">{{ user.lastName || 'Not provided' }}</div>
+          <input 
+            *ngIf="editMode" 
+            type="text" 
+            [(ngModel)]="editData.lastName" 
+            class="form-control"
+            placeholder="Last Name"
+          >
+        </div>
+      </div>
+
+      <div *ngIf="editMode" class="edit-actions">
+        <button 
+          class="btn-primary" 
+          (click)="saveProfile()"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="isLoading">Saving...</span>
+          <span *ngIf="!isLoading">Save Changes</span>
+        </button>
+        <button 
+          class="btn-secondary" 
+          (click)="cancelEdit()"
+          [disabled]="isLoading"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 
