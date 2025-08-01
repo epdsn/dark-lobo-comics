@@ -1,0 +1,67 @@
+<div class="home-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Welcome to Dark Lobo Comics</h1>
+      <p class="hero-subtitle">Discover the world of dark, compelling stories and unforgettable characters</p>
+      
+      <div class="hero-actions" *ngIf="!isAuthenticated">
+        <a routerLink="/register" class="btn-primary">Get Started</a>
+        <a routerLink="/login" class="btn-secondary">Sign In</a>
+      </div>
+      
+      <div class="hero-actions" *ngIf="isAuthenticated">
+        <a routerLink="/profile" class="btn-primary">View Profile</a>
+        <a routerLink="/comics" class="btn-secondary">Browse Comics</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <div class="container">
+      <h2 class="section-title">Why Choose Dark Lobo Comics?</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Vast Collection</h3>
+          <p>Explore thousands of comics from indie creators to established publishers</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Unique Artwork</h3>
+          <p>Discover stunning illustrations and distinctive artistic styles</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Digital Reading</h3>
+          <p>Read anywhere, anytime with our responsive digital platform</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🌟</div>
+          <h3>Exclusive Content</h3>
+          <p>Access exclusive stories and behind-the-scenes content</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <div class="container">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Join thousands of comic enthusiasts and discover your next favorite story</p>
+      
+      <div class="cta-actions" *ngIf="!isAuthenticated">
+        <a routerLink="/register" class="btn-primary">Create Account</a>
+        <a routerLink="/login" class="btn-outline">Already have an account?</a>
+      </div>
+      
+      <div class="cta-actions" *ngIf="isAuthenticated">
+        <a routerLink="/comics" class="btn-primary">Start Reading</a>
+        <a routerLink="/profile" class="btn-outline">Manage Account</a>
+      </div>
+    </div>
+  </div>
+</div> 
