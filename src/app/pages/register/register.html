@@ -69,6 +69,14 @@
           placeholder="Create a password"
           class="form-control"
         >
+        <div class="password-requirements">
+          <small>Password must contain:</small>
+          <ul>
+            <li [class.valid]="hasUppercase()">At least one uppercase letter (A-Z)</li>
+            <li [class.valid]="hasNonAlphanumeric()">At least one special character (!@#$%^&*)</li>
+            <li [class.valid]="registerData.password.length >= 6">At least 6 characters</li>
+          </ul>
+        </div>
       </div>
       
       <div class="form-group">

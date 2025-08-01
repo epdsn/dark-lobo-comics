@@ -73,6 +73,10 @@ export class AuthService {
   register(userData: RegisterRequest): Observable<AuthResponse> {
     console.log('Making register request to:', `${this.API_URL}/register`);
     console.log('User data:', userData);
+    console.log('Request headers will include:', {
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken() ? `Bearer ${this.getToken()}` : 'None'
+    });
     
     return this.http.post<AuthResponse>(`${this.API_URL}/register`, userData)
       .pipe(
