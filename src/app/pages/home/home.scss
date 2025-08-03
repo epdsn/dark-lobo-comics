@@ -1,6 +1,6 @@
 .home-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
 }
 
 // Hero Section
@@ -11,8 +11,7 @@
   justify-content: center;
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%),
-              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  background: #000000;
 }
 
 .hero-content {
@@ -23,11 +22,11 @@
   font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  background: linear-gradient(45deg, #ff0000, #8b0000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+  text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -60,7 +59,7 @@
 // Buttons
 .btn-primary, .btn-secondary, .btn-outline {
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -70,13 +69,13 @@
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  background: linear-gradient(45deg, #ff0000, #8b0000);
   color: #ffffff;
   border: none;
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
   }
 }
 
@@ -106,7 +105,7 @@
 // Features Section
 .features-section {
   padding: 5rem 2rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: #000000;
 }
 
 .container {
@@ -134,17 +133,17 @@
 }
 
 .feature-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
+  background: rgba(255, 0, 0, 0.05);
+  border-radius: 0;
   padding: 2rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
   transition: all 0.3s ease;
   
   &:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.4);
   }
 }
 
@@ -169,7 +168,7 @@
 .cta-section {
   padding: 5rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
+  background: #000000;
 }
 
 .cta-section h2 {

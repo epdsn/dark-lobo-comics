@@ -1,0 +1,96 @@
+<div class="comics-container">
+  <div class="comics-header">
+    <div class="container">
+      <h1>Comic Catalog</h1>
+      <p>Discover amazing stories from Dark Lobo Comics and beyond</p>
+    </div>
+  </div>
+
+  <div class="comics-content">
+    <div class="container">
+      <!-- Filters Section -->
+      <div class="filters-section">
+        <div class="search-box">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchChange()"
+            placeholder="Search comics, series, or descriptions..."
+            class="search-input"
+          >
+        </div>
+        
+        <div class="filter-controls">
+          <select [(ngModel)]="selectedGenre" (change)="onGenreChange()" class="filter-select">
+            <option value="All">All Genres</option>
+            <option *ngFor="let genre of genres.slice(1)" [value]="genre">{{ genre }}</option>
+          </select>
+          
+          <select [(ngModel)]="selectedSeries" (change)="onSeriesChange()" class="filter-select">
+            <option value="All">All Series</option>
+            <option *ngFor="let series of series.slice(1)" [value]="series">{{ series }}</option>
+          </select>
+          
+          <button (click)="clearFilters()" class="btn-clear">Clear Filters</button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading comics...</p>
+      </div>
+
+      <!-- Results Count -->
+      <div *ngIf="!isLoading" class="results-info">
+        <p>{{ filteredComics.length }} comic{{ filteredComics.length !== 1 ? 's' : '' }} found</p>
+      </div>
+
+      <!-- Comics Grid -->
+      <div *ngIf="!isLoading && filteredComics.length > 0" class="comics-grid">
+        <div *ngFor="let comic of filteredComics" class="comic-card">
+          <div class="comic-cover">
+            <img [src]="comic.coverImage" [alt]="comic.title" class="cover-image">
+            <div class="comic-overlay">
+              <button class="btn-read">Read Now</button>
+              <button class="btn-details">Details</button>
+            </div>
+          </div>
+          
+          <div class="comic-info">
+            <div class="comic-header">
+              <h3 class="comic-title">{{ comic.title }}</h3>
+              <span class="comic-issue">{{ comic.issue }}</span>
+            </div>
+            
+            <p class="comic-series">{{ comic.series }}</p>
+            
+            <div class="comic-rating">
+              <span class="stars">
+                <span *ngFor="let star of getStarRating(comic.rating)" 
+                      [class.filled]="star === '★'"
+                      class="star">{{ star }}</span>
+              </span>
+              <span class="rating-text">{{ comic.rating }}/5</span>
+            </div>
+            
+            <p class="comic-description">{{ comic.description }}</p>
+            
+            <div class="comic-meta">
+              <span class="comic-genre">{{ comic.genre }}</span>
+              <span class="comic-price">${{ comic.price }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && filteredComics.length === 0" class="empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>No comics found</h3>
+        <p>Try adjusting your search or filters to find what you're looking for.</p>
+        <button (click)="clearFilters()" class="btn-primary">Clear All Filters</button>
+      </div>
+    </div>
+  </div>
+</div> 

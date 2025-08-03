@@ -4,6 +4,7 @@ import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { Profile } from './pages/profile/profile';
 import { Home } from './pages/home/home';
+import { Comics } from './pages/comics/comics';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'ping', component: PingTest },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'profile', component: Profile, canActivate: [AuthGuard] }
+  { path: 'profile', component: Profile, canActivate: [AuthGuard] },
+  { path: 'comics', component: Comics, canActivate: [AuthGuard] }
 ];
