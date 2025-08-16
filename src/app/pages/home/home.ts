@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -70,7 +70,8 @@ export class Home implements OnInit, OnDestroy {
 
   constructor(
     public authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private appRef: ApplicationRef
   ) {}
 
   ngOnInit() {
@@ -92,9 +93,9 @@ export class Home implements OnInit, OnDestroy {
     if (typeof window !== 'undefined') {
       console.log('Starting slideshow timer...');
       this.intervalId = window.setInterval(() => {
-        console.log('Timer triggered - advancing slide');
+        console.log('Timer triggered - advancing slide from', this.currentSlide, 'to', (this.currentSlide + 1) % this.slides.length);
         this.nextSlide();
-      }, 5000);
+      }, 5000); // Reduced to 3 seconds for testing
     }
   }
 
@@ -105,8 +106,14 @@ export class Home implements OnInit, OnDestroy {
   }
 
   nextSlide() {
+    console.log('nextSlide() called - currentSlide before:', this.currentSlide);
     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+    console.log('nextSlide() called - currentSlide after:', this.currentSlide);
+    
+    // Force change detection with multiple approaches
     this.cdr.detectChanges();
+    this.appRef.tick();
+    console.log('Change detection triggered with appRef.tick()');
   }
 
   previousSlide() {
@@ -115,13 +122,16 @@ export class Home implements OnInit, OnDestroy {
   }
 
   goToSlide(index: number) {
+    console.log('goToSlide() called - changing to slide:', index);
     this.currentSlide = index;
     this.cdr.detectChanges();
+    this.appRef.tick();
+    console.log('goToSlide() completed - currentSlide is now:', this.currentSlide);
   }
 
   onSlideChange() {
-    // Restart the timer when manually changing slides
-    this.stopSlideshow();
-    this.startSlideshow();
+    // Optional: You can add any additional logic here when slides change
+    // For now, we'll let the automatic slideshow continue running
+    console.log('Manual slide change to:', this.currentSlide);
   }
 } 
