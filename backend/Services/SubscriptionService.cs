@@ -202,24 +202,4 @@ public class SubscriptionService : ISubscriptionService
             await _context.SaveChangesAsync();
         }
     }
-
-    private async Task UpdateSubscriptionStatusByStripeIdAsync(string stripeSubscriptionId, string status)
-    {
-        var subscription = await _context.Subscriptions
-            .FirstOrDefaultAsync(s => s.StripeSubscriptionId == stripeSubscriptionId);
-
-        if (subscription != null)
-        {
-            subscription.Status = status;
-            subscription.UpdatedAt = DateTime.UtcNow;
-
-            var user = await _context.Users.FindAsync(subscription.UserId);
-            if (user != null)
-            {
-                user.SubscriptionStatus = status;
-            }
-
-            await _context.SaveChangesAsync();
-        }
-    }
 }

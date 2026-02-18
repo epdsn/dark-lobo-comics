@@ -165,7 +165,7 @@ export class AuthService {
 
   hasActiveSubscription(): boolean {
     const user = this.getCurrentUser();
-    return user?.subscriptionStatus === 'Active' || user?.subscriptionStatus === 'active';
+    return user?.subscriptionStatus?.toLowerCase() === 'active';
   }
 
   getSubscriptionStatus(): string {

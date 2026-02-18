@@ -31,7 +31,7 @@ public class ComicsController : ControllerBase
             .AsQueryable();
 
         // Non-subscribers can only see free comics
-        if (subscriptionStatus != "Active" && subscriptionStatus != "active" && userRole != "Admin")
+        if (subscriptionStatus != "active" && userRole != "Admin")
         {
             query = query.Where(s => !s.IsPremium);
         }
@@ -68,7 +68,7 @@ public class ComicsController : ControllerBase
         var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
         var subscriptionStatus = User.FindFirst("SubscriptionStatus")?.Value;
 
-        if (series.IsPremium && subscriptionStatus != "Active" && subscriptionStatus != "active" && userRole != "Admin")
+        if (series.IsPremium && subscriptionStatus != "active" && userRole != "Admin")
         {
             return Forbid();
         }
@@ -98,7 +98,7 @@ public class ComicsController : ControllerBase
         var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
         var subscriptionStatus = User.FindFirst("SubscriptionStatus")?.Value;
 
-        if (series.IsPremium && subscriptionStatus != "Active" && subscriptionStatus != "active" && userRole != "Admin")
+        if (series.IsPremium && subscriptionStatus != "active" && userRole != "Admin")
         {
             return Forbid();
         }

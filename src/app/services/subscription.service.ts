@@ -53,7 +53,7 @@ export class SubscriptionService {
 
   hasActiveSubscription(): boolean {
     const subscription = this.subscriptionSubject.value;
-    return subscription?.status === 'Active' || subscription?.status === 'active';
+    return subscription?.status?.toLowerCase() === 'active';
   }
 
   getCurrentSubscription(): Subscription | null {
