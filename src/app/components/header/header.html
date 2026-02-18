@@ -9,7 +9,9 @@
         </svg>
         Comics
       </a>
+      <a routerLink="/subscription" class="nav-link">Subscription</a>
       <a routerLink="/profile" class="nav-link">Profile</a>
+      <a routerLink="/admin" class="nav-link admin-link" *ngIf="isAdmin">Admin</a>
       <button class="nav-link logout-btn" (click)="logout()">Logout</button>
     </nav>
     

@@ -1,0 +1,154 @@
+<div class="admin-dashboard">
+  <header class="dashboard-header">
+    <h1>Comic Admin Dashboard</h1>
+    <button class="create-button" (click)="createNewSeries()">
+      + Create New Series
+    </button>
+  </header>
+
+  <div class="message" *ngIf="message" [class.success]="messageType === 'success'" [class.error]="messageType === 'error'">
+    {{ message }}
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Series List -->
+    <div class="series-list">
+      <h2>Comic Series</h2>
+      
+      <div class="loading" *ngIf="isLoading">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="series-items" *ngIf="!isLoading">
+        <div 
+          class="series-item" 
+          *ngFor="let series of seriesList"
+          [class.selected]="selectedSeries?.id === series.id"
+          (click)="selectSeries(series)"
+        >
+          <img 
+            *ngIf="series.coverImageUrl" 
+            [src]="getImageUrl(series.coverImageUrl)" 
+            [alt]="series.title"
+            class="series-cover"
+          />
+          <div class="series-info">
+            <h3>{{ series.title }}</h3>
+            <span class="badge" [class.premium]="series.isPremium">
+              {{ series.isPremium ? 'Premium' : 'Free' }}
+            </span>
+            <span class="page-count">{{ series.pageCount }} pages</span>
+          </div>
+          <div class="series-actions">
+            <button class="edit-button" (click)="editSeries(series); $event.stopPropagation()">
+              Edit
+            </button>
+            <button class="delete-button" (click)="deleteSeries(series); $event.stopPropagation()">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Series Details/Pages -->
+    <div class="series-details" *ngIf="selectedSeries">
+      <div class="details-header">
+        <h2>{{ selectedSeries.title }}</h2>
+        <button class="add-page-button" (click)="addPage()">
+          + Add Page
+        </button>
+      </div>
+
+      <div class="pages-grid">
+        <div class="page-item" *ngFor="let page of selectedSeriesPages">
+          <img [src]="getImageUrl(page.imageUrl)" [alt]="'Page ' + page.pageNumber" />
+          <div class="page-info">
+            <span>Page {{ page.pageNumber }}</span>
+            <button class="delete-button" (click)="deletePage(page)">Delete</button>
+          </div>
+        </div>
+
+        <div class="no-pages" *ngIf="selectedSeriesPages.length === 0">
+          <p>No pages yet. Add some pages to this series.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-selection" *ngIf="!selectedSeries && !isLoading">
+      <p>Select a series to view and manage its pages</p>
+    </div>
+  </div>
+
+  <!-- Series Form Modal -->
+  <div class="modal" *ngIf="showSeriesForm">
+    <div class="modal-content">
+      <h2>{{ isEditMode ? 'Edit' : 'Create' }} Series</h2>
+      
+      <form [formGroup]="seriesForm" (ngSubmit)="saveSeries()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" type="text" formControlName="title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group checkbox">
+          <label>
+            <input type="checkbox" formControlName="isPremium" />
+            Premium Content (Requires Subscription)
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="coverImage">Cover Image</label>
+          <input id="coverImage" type="file" accept="image/*" (change)="onCoverImageSelected($event)" />
+          <span class="uploading" *ngIf="uploadingCover">Uploading...</span>
+          <input type="hidden" formControlName="coverImageUrl" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="cancelSeriesForm()">
+            Cancel
+          </button>
+          <button type="submit" class="save-button" [disabled]="seriesForm.invalid || uploadingCover">
+            {{ isEditMode ? 'Update' : 'Create' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Page Form Modal -->
+  <div class="modal" *ngIf="showPageForm">
+    <div class="modal-content">
+      <h2>Add Page</h2>
+      
+      <form [formGroup]="pageForm" (ngSubmit)="savePage()">
+        <div class="form-group">
+          <label for="pageNumber">Page Number</label>
+          <input id="pageNumber" type="number" formControlName="pageNumber" required min="1" />
+        </div>
+
+        <div class="form-group">
+          <label for="pageImage">Page Image</label>
+          <input id="pageImage" type="file" accept="image/*" (change)="onPageImageSelected($event)" required />
+          <span class="uploading" *ngIf="uploadingPage">Uploading...</span>
+          <input type="hidden" formControlName="imageUrl" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="cancelPageForm()">
+            Cancel
+          </button>
+          <button type="submit" class="save-button" [disabled]="pageForm.invalid || uploadingPage">
+            Add Page
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
