@@ -1,0 +1,84 @@
+<div class="subscription-page">
+  <div class="header">
+    <h1>Subscription</h1>
+  </div>
+
+  <div class="message" *ngIf="message" [class.success]="messageType === 'success'" [class.error]="messageType === 'error'">
+    {{ message }}
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading subscription details...</p>
+  </div>
+
+  <div class="content" *ngIf="!isLoading">
+    <!-- Active Subscription -->
+    <div class="subscription-status" *ngIf="hasActiveSubscription()">
+      <div class="status-card active">
+        <h2>✓ Premium Subscriber</h2>
+        <p>You have full access to all premium comics</p>
+        
+        <div class="subscription-details" *ngIf="subscription">
+          <div class="detail-row">
+            <span class="label">Status:</span>
+            <span class="value">{{ subscription.status }}</span>
+          </div>
+          <div class="detail-row" *ngIf="subscription.startDate">
+            <span class="label">Started:</span>
+            <span class="value">{{ subscription.startDate | date }}</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="browse-button" (click)="goToComics()">
+            Browse Comics
+          </button>
+          <button class="cancel-button" (click)="cancelSubscription()">
+            Cancel Subscription
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Active Subscription -->
+    <div class="pricing-section" *ngIf="!hasActiveSubscription()">
+      <div class="pricing-header">
+        <h2>Unlock Premium Comics</h2>
+        <p>Get unlimited access to our exclusive premium comic collection</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="plan-badge">Premium Plan</div>
+        <div class="price">
+          <span class="amount">$9.99</span>
+          <span class="period">/month</span>
+        </div>
+
+        <ul class="features">
+          <li>✓ Access to all premium comics</li>
+          <li>✓ Unlimited reading</li>
+          <li>✓ New releases every week</li>
+          <li>✓ Ad-free experience</li>
+          <li>✓ Cancel anytime</li>
+        </ul>
+
+        <button class="subscribe-button" (click)="subscribe()">
+          Subscribe Now
+        </button>
+
+        <p class="note">
+          * This is a test page. Stripe integration required for payment processing.
+        </p>
+      </div>
+
+      <div class="free-access">
+        <h3>Free Comics</h3>
+        <p>Not ready to subscribe? You can still enjoy our free comic collection!</p>
+        <button class="browse-button" (click)="goToComics()">
+          Browse Free Comics
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

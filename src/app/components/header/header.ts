@@ -24,4 +24,8 @@ export class Header {
   get isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
 }

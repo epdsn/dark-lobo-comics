@@ -1,0 +1,257 @@
+.comic-reader {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+
+  .reader-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #333;
+    z-index: 100;
+
+    .back-button {
+      background: transparent;
+      border: 1px solid #ff0000;
+      color: #ff0000;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #ff0000;
+        color: #fff;
+      }
+    }
+
+    .comic-info {
+      flex: 1;
+      text-align: center;
+
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+        background: linear-gradient(to right, #ff0000, #fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .page-indicator {
+        font-size: 0.9rem;
+        color: #999;
+      }
+    }
+
+    .mode-button {
+      background: transparent;
+      border: 1px solid #666;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+    }
+  }
+
+  .reader-content {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .sequential-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    padding: 2rem;
+
+    .page-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .comic-page {
+        max-width: 100%;
+        max-height: calc(100vh - 200px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+      }
+    }
+
+    .navigation-controls {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 2rem;
+      padding: 1rem;
+
+      .nav-button {
+        background: #ff0000;
+        border: none;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover:not(:disabled) {
+          background: #cc0000;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+        }
+
+        &:disabled {
+          background: #333;
+          color: #666;
+          cursor: not-allowed;
+        }
+      }
+
+      .page-number {
+        font-size: 1.1rem;
+        color: #999;
+        min-width: 100px;
+        text-align: center;
+      }
+    }
+  }
+
+  .scroll-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+
+    .page-container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+
+      .comic-page {
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+        margin-bottom: 0.5rem;
+      }
+
+      .page-label {
+        color: #999;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1rem;
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #333;
+      border-top-color: #ff0000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    p {
+      color: #999;
+      font-size: 1.1rem;
+    }
+  }
+
+  .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1rem;
+
+    p {
+      color: #ff0000;
+      font-size: 1.2rem;
+    }
+
+    button {
+      background: #ff0000;
+      border: none;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #cc0000;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .comic-reader {
+    .reader-header {
+      padding: 0.75rem 1rem;
+
+      .comic-info h1 {
+        font-size: 1.1rem;
+      }
+
+      .page-indicator {
+        font-size: 0.8rem;
+      }
+    }
+
+    .sequential-mode {
+      padding: 1rem;
+
+      .page-container .comic-page {
+        max-height: calc(100vh - 180px);
+      }
+
+      .navigation-controls {
+        gap: 1rem;
+
+        .nav-button {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .scroll-mode {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+}

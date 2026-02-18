@@ -1,0 +1,314 @@
+.subscription-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+  padding: 2rem;
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #ff0000, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+  }
+
+  .message {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+
+    &.success {
+      background: rgba(0, 255, 0, 0.1);
+      border: 1px solid #00ff00;
+      color: #00ff00;
+    }
+
+    &.error {
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid #ff0000;
+      color: #ff0000;
+    }
+  }
+
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 1rem;
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid #333;
+      border-top-color: #ff0000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .subscription-status {
+    display: flex;
+    justify-content: center;
+
+    .status-card {
+      background: #1a1a1a;
+      border: 2px solid #00ff00;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+
+      h2 {
+        color: #00ff00;
+        margin: 0 0 1rem 0;
+      }
+
+      p {
+        color: #999;
+        margin-bottom: 2rem;
+      }
+
+      .subscription-details {
+        background: #0a0a0a;
+        padding: 1.5rem;
+        border-radius: 4px;
+        margin-bottom: 2rem;
+        text-align: left;
+
+        .detail-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.75rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .label {
+            color: #999;
+          }
+
+          .value {
+            color: #fff;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        button {
+          padding: 0.75rem 1.5rem;
+          border: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 1rem;
+
+          &.browse-button {
+            background: #ff0000;
+            color: #fff;
+
+            &:hover {
+              background: #cc0000;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+            }
+          }
+
+          &.cancel-button {
+            background: transparent;
+            border: 1px solid #666;
+            color: #fff;
+
+            &:hover {
+              border-color: #ff0000;
+              color: #ff0000;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pricing-section {
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 3rem;
+
+      h2 {
+        font-size: 2rem;
+        color: #ff0000;
+        margin: 0 0 0.5rem 0;
+      }
+
+      p {
+        color: #999;
+        font-size: 1.1rem;
+      }
+    }
+
+    .pricing-card {
+      background: #1a1a1a;
+      border: 2px solid #ff0000;
+      padding: 2.5rem;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      text-align: center;
+
+      .plan-badge {
+        display: inline-block;
+        background: #ff0000;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+
+      .price {
+        margin-bottom: 2rem;
+
+        .amount {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        .period {
+          font-size: 1.2rem;
+          color: #999;
+        }
+      }
+
+      .features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2rem 0;
+        text-align: left;
+
+        li {
+          padding: 0.75rem 0;
+          border-bottom: 1px solid #333;
+          color: #fff;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+
+      .subscribe-button {
+        width: 100%;
+        background: #ff0000;
+        border: none;
+        color: #fff;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+
+        &:hover {
+          background: #cc0000;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
+        }
+      }
+
+      .note {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+    }
+
+    .free-access {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+
+      h3 {
+        color: #fff;
+        margin: 0 0 0.5rem 0;
+      }
+
+      p {
+        color: #999;
+        margin-bottom: 1.5rem;
+      }
+
+      .browse-button {
+        background: transparent;
+        border: 1px solid #ff0000;
+        color: #ff0000;
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #ff0000;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .subscription-page {
+    padding: 1rem;
+
+    .header h1 {
+      font-size: 1.8rem;
+    }
+
+    .pricing-section {
+      .pricing-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .pricing-card {
+        padding: 1.5rem;
+
+        .price .amount {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    .subscription-status .status-card .actions {
+      flex-direction: column;
+    }
+  }
+}

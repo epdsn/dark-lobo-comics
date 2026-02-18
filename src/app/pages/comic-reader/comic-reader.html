@@ -1,0 +1,77 @@
+<div class="comic-reader">
+  <div class="reader-header">
+    <button class="back-button" (click)="goBack()">
+      ← Back to Comics
+    </button>
+    
+    <div class="comic-info" *ngIf="series">
+      <h1>{{ series.title }}</h1>
+      <span class="page-indicator" *ngIf="!isLoading">
+        Page {{ currentPageIndex + 1 }} of {{ pages.length }}
+      </span>
+    </div>
+
+    <div class="reading-mode-toggle">
+      <button (click)="toggleReadingMode()" class="mode-button">
+        {{ readingMode === 'sequential' ? '📖 Sequential' : '📜 Scroll' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="reader-content" *ngIf="!isLoading && !error">
+    <!-- Sequential Mode -->
+    <div class="sequential-mode" *ngIf="readingMode === 'sequential'">
+      <div class="page-container" *ngIf="currentPage">
+        <img 
+          [src]="getImageUrl(currentPage.imageUrl)" 
+          [alt]="'Page ' + currentPage.pageNumber"
+          class="comic-page"
+        />
+      </div>
+
+      <div class="navigation-controls">
+        <button 
+          class="nav-button prev" 
+          (click)="previousPage()" 
+          [disabled]="currentPageIndex === 0"
+        >
+          ← Previous
+        </button>
+        
+        <span class="page-number">
+          {{ currentPageIndex + 1 }} / {{ pages.length }}
+        </span>
+        
+        <button 
+          class="nav-button next" 
+          (click)="nextPage()" 
+          [disabled]="currentPageIndex === pages.length - 1"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll Mode -->
+    <div class="scroll-mode" *ngIf="readingMode === 'scroll'">
+      <div class="page-container" *ngFor="let page of pages">
+        <img 
+          [src]="getImageUrl(page.imageUrl)" 
+          [alt]="'Page ' + page.pageNumber"
+          class="comic-page"
+        />
+        <div class="page-label">Page {{ page.pageNumber }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading comic...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p>{{ error }}</p>
+    <button (click)="goBack()">Return to Comics</button>
+  </div>
+</div>

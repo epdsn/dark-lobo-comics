@@ -8,6 +8,8 @@ export interface User {
   username: string;
   firstName?: string;
   lastName?: string;
+  role: string;
+  subscriptionStatus: string;
 }
 
 export interface LoginRequest {
@@ -154,5 +156,20 @@ export class AuthService {
 
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.role === 'Admin';
+  }
+
+  hasActiveSubscription(): boolean {
+    const user = this.getCurrentUser();
+    return user?.subscriptionStatus === 'Active' || user?.subscriptionStatus === 'active';
+  }
+
+  getSubscriptionStatus(): string {
+    const user = this.getCurrentUser();
+    return user?.subscriptionStatus || 'None';
   }
 } 
